@@ -1,8 +1,11 @@
 package config
 
 import (
+	"log"
 	"os"
 	"strconv"
+
+	"github.com/joho/godotenv"
 )
 
 type Config struct {
@@ -16,6 +19,11 @@ type Config struct {
 }
 
 func Load() *Config {
+	err := godotenv.Load()
+	if err != nil {
+		log.Println("Warning: Error loading .env file:", err)
+
+	}
 	return &Config{
 		Env:            getEnv("APP_ENV", "development"),
 		DbURL:          getEnv("DATABASE_URL", "postgres://user:pass@localhost:5432/fleetdb?sslmode=disable"),
@@ -28,17 +36,23 @@ func Load() *Config {
 }
 
 func getEnv(key, fallback string) string {
-	if val, ok := os.LookupEnv(key); ok {
-		return val
+	val := os.Getenv(key)
+	if val == "" {
+		return fallback
 	}
-	return fallback
+	return val
 }
 
 func getEnvFloat(key string, fallback float64) float64 {
-	if val, ok := os.LookupEnv(key); ok {
-		if f, err := strconv.ParseFloat(val, 64); err == nil {
-			return f
-		}
+	val := os.Getenv(key)
+	if val == "" {
+		return fallback
 	}
-	return fallback
+
+	f, err := strconv.ParseFloat(val, 64)
+	if err != nil {
+		return fallback
+	}
+
+	return f
 }

@@ -1,10 +1,12 @@
 package config
 
 import (
+	"FleetManagementSystem/internal/controller"
+
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter() *gin.Engine {
+func SetupRouter(locationHandler *controller.LocationController) *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/health", func(c *gin.Context) {
@@ -13,12 +15,13 @@ func SetupRouter() *gin.Engine {
 		})
 	})
 
-	// apiV1 := r.Group("/api/v1")
+	apiV1 := r.Group("/api/v1")
 
-	// vehicles := apiV1.Group("/vehicles")
+	vehicles := apiV1.Group("/vehicles")
 
 	{
-		// vehicles.GET("/",)
+		vehicles.GET("/:vehicle_id/location", locationHandler.GetLatestLocation)
+		vehicles.GET("/:vehicle_id/history", locationHandler.GetLocationHistory)
 	}
 
 	return r
