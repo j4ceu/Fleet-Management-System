@@ -13,8 +13,6 @@ type Config struct {
 	DbURL          string
 	MQTTBroker     string
 	RabbitURL      string
-	GeofenceLat    float64
-	GeofenceLong   float64
 	GeofenceRadius float64
 }
 
@@ -29,8 +27,6 @@ func Load() *Config {
 		DbURL:          getEnv("DATABASE_URL", "postgres://user:pass@localhost:5432/fleetdb?sslmode=disable"),
 		MQTTBroker:     getEnv("MQTT_BROKER", "tcp://localhost:1883"),
 		RabbitURL:      getEnv("RABBITMQ_URL", "amqp://guest:guest@localhost:5672/"),
-		GeofenceLat:    getEnvFloat("GEOFENCE_LAT", -6.2088),
-		GeofenceLong:   getEnvFloat("GEOFENCE_LONG", 106.8456),
 		GeofenceRadius: getEnvFloat("GEOFENCE_RADIUS", 50),
 	}
 }
