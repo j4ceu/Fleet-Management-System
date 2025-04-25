@@ -43,13 +43,13 @@ docker-compose up -d --build
 
 ### 🛰️ 3. Kirim Simulasi Lokasi
 ```bash
-docker logs -f gps-publisher
+docker logs -f mqtt-publisher
 ```
 > Publisher akan mengirim data GPS ke MQTT tiap 5 detik.
 
 ### 📥 4. Cek Worker Alert
 ```bash
-docker logs -f geofence-worker
+docker logs -f geofence-alert-worker
 ```
 > Akan muncul alert jika kendaraan masuk geofence.
 
