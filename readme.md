@@ -144,6 +144,7 @@ Sebagai backend engineer:
 - ✅ **Pertama kali belajar MQTT** dan cara publish/subscribe menggunakan Eclipse Mosquitto
 - ✅ Paham konsep **exchange di RabbitMQ**
 - ✅ Belajar bagaimana cara **memisahkan flow data** ke ingestion dan alert secara paralel
+- ✅ Ternyata **Docker Compose bisa langsung jalanin SQL** untuk inisialisasi database, cukup dengan menaruh file `.sql` di folder `initdb` dan mount ke container
 
 ---
 
