@@ -1,12 +1,10 @@
 package mqtt
 
 import (
-	"FleetManagementSystem/internal/api/location"
 	"FleetManagementSystem/internal/entity"
 	"FleetManagementSystem/internal/infrastructure/config"
 	"FleetManagementSystem/internal/infrastructure/rabbitmq"
 	"FleetManagementSystem/pkg/utils"
-	"context"
 	"encoding/json"
 	"time"
 
@@ -35,7 +33,7 @@ func NewClient(cfg *config.Config, log *logrus.Logger, clientID string) mqtt.Cli
 	return client
 }
 
-func SubscribeLocation(client mqtt.Client, log *logrus.Logger, service location.Service, cfg config.Config) {
+func SubscribeLocation(client mqtt.Client, log *logrus.Logger, cfg config.Config) {
 	topic := "/fleet/vehicle/+/location"
 	funcName := "SubscribeLocation"
 
@@ -55,9 +53,15 @@ func SubscribeLocation(client mqtt.Client, log *logrus.Logger, service location.
 			Timestamp: payload.Timestamp,
 		}
 
-		if err := service.StoreLocation(context.Background(), loc); err != nil {
-			log.Errorf("[ERROR][%s] Failed to store location: %v", funcName, err)
-			return
+		//Change to RMQ too
+		// if err := service.StoreLocation(context.Background(), loc); err != nil {
+		// 	log.Errorf("[ERROR][%s] Failed to store location: %v", funcName, err)
+		// 	return
+		// }
+
+		log.Infof("[INFO][%s] Publishing RMQ to save_db", funcName)
+		if err := rabbitmq.PublishRMQ(loc, "save_db", "fleet.events"); err != nil {
+			log.Errorf("Failed to publish to RabbitMQ: %v", err)
 		}
 
 		log.Infof("[INFO][%s] Location stored for vehicle: %s", funcName, loc.VehicleID)

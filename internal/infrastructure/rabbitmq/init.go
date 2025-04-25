@@ -30,7 +30,17 @@ func Init(url string, log *logrus.Logger) {
 		log.Fatalf("Failed to declare queue: %v", err)
 	}
 
+	_, err = Ch.QueueDeclare("save_db", true, false, false, false, nil)
+	if err != nil {
+		log.Fatalf("Failed to declare queue: %v", err)
+	}
+
 	err = Ch.QueueBind("geofence_alerts", "geofence_alerts", "fleet.events", false, nil)
+	if err != nil {
+		log.Fatalf("Failed to bind queue to exchange: %v", err)
+	}
+
+	err = Ch.QueueBind("save_db", "save_db", "fleet.events", false, nil)
 	if err != nil {
 		log.Fatalf("Failed to bind queue to exchange: %v", err)
 	}

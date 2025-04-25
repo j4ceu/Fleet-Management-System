@@ -6,7 +6,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-func PublishRMQ(data interface{}, routeKey, exchange string) error {
+func PublishRMQ(data any, routeKey, exchange string) error {
 	body, err := json.Marshal(data)
 	if err != nil {
 		return err

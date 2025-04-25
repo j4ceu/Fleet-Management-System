@@ -29,7 +29,8 @@ func main() {
 	locationService := location.NewService(locationRepo, log)
 	locationController := controller.NewLocationController(locationService)
 
-	go mqtt.SubscribeLocation(mqttClient, log, locationService, *cfg)
+	go mqtt.SubscribeLocation(mqttClient, log, *cfg)
+	go rabbitmq.ConsumeToSaveDB(log, locationService)
 
 	r := config.SetupRouter(locationController)
 	r.Run()
