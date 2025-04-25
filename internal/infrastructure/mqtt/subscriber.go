@@ -14,8 +14,7 @@ import (
 
 func NewClient(cfg *config.Config, log *logrus.Logger, clientID string) mqtt.Client {
 	opts := mqtt.NewClientOptions().
-		AddBroker("tcp://127.0.0.1:1883").
-		AddBroker("tcp://[::1]:1883")
+		AddBroker(cfg.MQTTBroker)
 	opts.SetClientID(clientID)
 	opts.SetConnectTimeout(5 * time.Second)
 	opts.OnConnect = func(c mqtt.Client) {
