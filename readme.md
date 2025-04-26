@@ -65,7 +65,7 @@ Tersedia Postman Collection di file `postman_collection.json` untuk mencoba selu
 1. Buka Postman
 2. Import file `postman_collection.json`
 3. Pastikan environment base URL adalah `http://localhost:8080`
-4. Jalankan koleksi seperti `Get Location`, atau `Get Location History`
+4. Jalankan koleksi seperti `Get LAtest Location`, atau `Get Location History`
 5. Untuk vehicle_id yg tersedia yaitu B1234XYZ, D5678DGV, F9876CMP, T1111CBC, B2123KCM, A5230KCM
 
 ---
