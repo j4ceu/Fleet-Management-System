@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "57dfd103-fd8c-40fd-82c3-5e1e6751df77",
+		"name": "Fleet Management System API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16617911"
+	},
+	"item": [
+		{
+			"name": "Get Latest Location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/vehicles/D5678DGV/location",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"D5678DGV",
+						"location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Location History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/vehicles/D5678DGV/history",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"vehicles",
+						"D5678DGV",
+						"history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

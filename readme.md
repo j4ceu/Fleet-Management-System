@@ -55,6 +55,21 @@ docker logs -f geofence-alert-worker
 
 ---
 
+---
+
+## 📄 Postman Collection
+
+Tersedia Postman Collection di file `postman_collection.json` untuk mencoba seluruh endpoint.
+
+### 🔧 Cara Menjalankan:
+1. Buka Postman
+2. Import file `postman_collection.json`
+3. Pastikan environment base URL adalah `http://localhost:8080`
+4. Jalankan koleksi seperti `Get Location`, atau `Get Location History`
+5. Untuk vehicle_id yg tersedia yaitu B1234XYZ, D5678DGV, F9876CMP, T1111CBC, B2123KCM, A5230KCM
+
+---
+
 ## 🗺️ Alur Awal (Soal)
 - Kendaraan publish koordinat via MQTT
 - Data disimpan ke DB
@@ -132,8 +147,8 @@ Tujuannya supaya sistem tetap stabil walaupun data masuk terus-menerus.
 - 📡 Publish notifikasi ke RabbitMQ 
 - 🔔 Worker untuk konsumsi alert & log
 - 🧪 REST API untuk:
-  - `GET /vehicles/:id/location`
-  - `GET /vehicles/:id/history?start=&end=`
+  - `GET /api/v1/vehicles/:vehicle_id/location`
+  - `GET /api/v1//vehicles/:vehicle_id/history?start=&end=`
 
 ---
 
